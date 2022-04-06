@@ -3,6 +3,7 @@ package com.gobbledn.profileservice;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +16,7 @@ public class ProfileController {
     @Autowired
     private ProfileService service;
 
-    @RequestMapping("")
+    @GetMapping("")
     public List<Profile> getProfiles() {
         return service.getProfile();
     }
