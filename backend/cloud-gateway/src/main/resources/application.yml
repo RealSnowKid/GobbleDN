@@ -1,0 +1,26 @@
+server:
+  port: 8989
+
+spring:
+  application:
+    name: GATEWAY
+  cloud:
+    gateway:
+      routes:
+        - id: profile-service
+          uri: lb://PROFILE-SERVICE/
+          predicates:
+            - Path=/profiles/**
+        - id: post-service
+          uri: lb://POST-SERVICE/
+          predicates:
+            - Path=/posts/**
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    hostname: localhost
