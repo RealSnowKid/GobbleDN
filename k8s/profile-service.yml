@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: profile-service-app
+  labels:
+    app: profile-service-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app : profile-service-app
+  template:
+    metadata:
+      labels:
+        app: profile-service-app
+    spec:
+      containers:
+      - name: profile-service-app
+        image: snowkid/profile-service:1.0
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 9191
+
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name:  profile-service-svc
+spec:
+  selector:
+    app:  profile-service-app
+  ports:
+  - port:  80
+    targetPort:  9191

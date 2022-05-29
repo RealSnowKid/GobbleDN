@@ -1,6 +1,7 @@
 package com.gobbledn.profileservice;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,4 +19,17 @@ public class ProfileService {
     public Profile saveProfile(Profile profile) {
         return repository.save(profile);
     }
+
+    public Optional<Profile> getProfileById(Integer Id) { return repository.findById(Id); }
+
+    public Integer increaseProfilePosts(String Id) {
+        int id = Integer.parseInt(Id);
+        Optional<Profile> updateProfile = repository.findById(id);
+        if (updateProfile.isPresent()) {
+            updateProfile.get().setPost_count(updateProfile.get().getPost_count() + 1);
+            repository.save(updateProfile.get());
+        }
+        return updateProfile.get().getPost_count();
+    }
 }
+

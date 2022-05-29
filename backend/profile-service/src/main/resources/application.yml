@@ -16,11 +16,18 @@ spring:
       enabled: true
   application:
     name: PROFILE-SERVICE
+  cloud:
+    stream:
+      bindings:
+        postCreated-in-0:
+          destination: post-events
+
 eureka:
-  client:
-    register-with-eureka: true
-    fetch-registry: true
-    service-url:
-      defaultZone: http://localhost:8761/eureka/
   instance:
-    hostname: localhost
+    preferIpAddress: true
+    hostname: eureka-0
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://eureka-0.eureka.default.svc.cluster.local:8761/eureka
