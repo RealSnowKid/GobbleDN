@@ -99,7 +99,6 @@
 				<configuration>
 					<repository>snowkid/profile-service</repository>
 					<tag>${project.version}</tag>
-					<useMavenSettingsForAuth>true</useMavenSettingsForAuth>
 				</configuration>
 			</plugin>
 		</plugins>
