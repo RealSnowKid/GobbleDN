@@ -40,5 +40,5 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          context: "{{defaultContext}}:backend/profile-service"
+          context: "backend/profile-service"
           tags: snowkid/profile-service:latest
