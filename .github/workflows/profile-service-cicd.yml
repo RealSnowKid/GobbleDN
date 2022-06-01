@@ -40,5 +40,5 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          context: ./
+          context: "{{defaultContext}}:backend/cloud-gateway"
           tags: snowkid/profile-service:latest
