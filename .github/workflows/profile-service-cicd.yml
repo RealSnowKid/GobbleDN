@@ -25,7 +25,8 @@ jobs:
       run: mvn clean package
   docker:
     environment: docker
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest 
+    needs: build
     steps:
       # - name: Set up QEMU
       #   uses: docker/setup-qemu-action@v1
