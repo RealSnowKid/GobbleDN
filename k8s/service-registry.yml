@@ -40,7 +40,7 @@ spec:
     spec:
       containers:
         - name: eureka
-          image: snowkid/service-registry:1.0
+          image: snowkid/service-registry:latest
           args: ["--spring.profiles.active=prod"]
           imagePullPolicy: Always
           ports:

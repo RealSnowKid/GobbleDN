@@ -19,7 +19,7 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: https://gobbledn.eu.auth0.com
+          issuer-uri: https://gobbledn.eu.auth0.com/
           audience: gobbledn-api.com
 eureka:
   instance:

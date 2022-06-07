@@ -16,7 +16,8 @@ spec:
     spec:
       containers:
       - name: profile-service-app
-        image: snowkid/profile-service:1.0
+        image: snowkid/profile-service:latest
+        args: ["--spring.profiles.active=prod"]
         imagePullPolicy: Always
         ports:
           - containerPort: 9191

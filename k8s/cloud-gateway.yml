@@ -16,7 +16,8 @@ spec:
     spec:
       containers:
         - name: cloud-gateway-app
-          image: snowkid/cloud-gateway:1.0
+          image: snowkid/cloud-gateway:latest
+          args: ["--spring.profiles.active=prod"]
           imagePullPolicy: Always
           ports:
             - containerPort: 8989
