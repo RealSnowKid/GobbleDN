@@ -29,6 +29,6 @@ jobs:
     - name: Publish to Docker Hub
       uses: docker/build-push-action@v2
       with:
-        context: ".backend/service-registry"
+        context: "./backend/service-registry"
         push: true
         tags: snowkid/service-registry:latest
