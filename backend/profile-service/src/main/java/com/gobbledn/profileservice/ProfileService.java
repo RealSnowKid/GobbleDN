@@ -3,6 +3,7 @@ package com.gobbledn.profileservice;
 import java.util.List;
 import java.util.Optional;
 
+import org.hibernate.procedure.NoSuchParameterException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,8 +29,11 @@ public class ProfileService {
         if (updateProfile.isPresent()) {
             updateProfile.get().setPost_count(updateProfile.get().getPost_count() + 1);
             repository.save(updateProfile.get());
+            return updateProfile.get().getPost_count();
         }
-        return updateProfile.get().getPost_count();
+       else {
+            throw new NoSuchParameterException(String.format("User with ID %id not found", Id));
+        }
     }
 }
 

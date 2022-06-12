@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,9 @@ public class ProfileController {
     @Autowired
     private ProfileService service;
 
+    @Autowired
+    private ModelMapper modelMapper;
+
     @GetMapping("")
     public List<Profile> getProfiles() {
         return service.getProfile();
@@ -25,8 +29,10 @@ public class ProfileController {
     public Optional<Profile> getProfileById(@PathVariable(value="id") Integer id) {return service.getProfileById(id);}
 
     @PostMapping("/createProfile")
-    public Profile createProfile(@RequestBody Profile profile) {
-        return service.saveProfile(profile);
+    public ProfileDTO createProfile(@RequestBody ProfileDTO profileDTO) {
+        Profile profile = convertToEntity(profileDTO);
+        Profile createdProfile = service.saveProfile(profile);
+        return convertToDTO(createdProfile);
     }
 
     @PutMapping("/follow/{id}")
@@ -43,5 +49,15 @@ public class ProfileController {
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+    }
+
+    private ProfileDTO convertToDTO(Profile profile) {
+        ProfileDTO profileDTO = modelMapper.map(profile, ProfileDTO.class);
+        return profileDTO;
+    }
+
+    private Profile convertToEntity(ProfileDTO profileDTO) {
+        Profile profile = modelMapper.map(profileDTO, Profile.class);
+        return profile;
     }
 }

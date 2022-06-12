@@ -1,5 +1,6 @@
 package com.gobbledn.profileservice;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -24,4 +25,8 @@ public class ProfileServiceApplication {
 		return message -> profileService.increaseProfilePosts(message);
 	}
 
+	@Bean
+	public ModelMapper modelMapper() {
+		return new ModelMapper();
+	}
 }
