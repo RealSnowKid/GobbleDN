@@ -23,9 +23,9 @@ public class SecurityConfig {
     SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) throws Exception {
         http
                 .authorizeExchange()
-                .pathMatchers("/**")
-                .authenticated()
                 .pathMatchers("/actuator/**").permitAll()
+                .pathMatchers("/profiles/**").authenticated()
+                .pathMatchers("/posts/**").authenticated()
                 .and()
                 .oauth2ResourceServer()
                 .jwt();
