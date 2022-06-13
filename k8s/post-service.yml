@@ -16,7 +16,8 @@ spec:
     spec:
       containers:
       - name: post-service-app
-        image: snowkid/post-service:1.0
+        image: snowkid/post-service:latest
+        args: ["--spring.profiles.active=prod"]
         imagePullPolicy: Always
         ports:
           - containerPort: 9192
