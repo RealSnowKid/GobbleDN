@@ -23,16 +23,16 @@ public class ProfileService {
 
     public Optional<Profile> getProfileById(Integer Id) { return repository.findById(Id); }
 
-    public Integer increaseProfilePosts(String Id) {
+    public void increaseProfilePosts(String Id) {
+        System.out.println(Id);
         int id = Integer.parseInt(Id);
         Optional<Profile> updateProfile = repository.findById(id);
         if (updateProfile.isPresent()) {
             updateProfile.get().setPost_count(updateProfile.get().getPost_count() + 1);
             repository.save(updateProfile.get());
-            return updateProfile.get().getPost_count();
         }
        else {
-            throw new NoSuchParameterException(String.format("User with ID %id not found", Id));
+            throw new NoSuchParameterException(String.format("User with ID %s not found", Id));
         }
     }
 }

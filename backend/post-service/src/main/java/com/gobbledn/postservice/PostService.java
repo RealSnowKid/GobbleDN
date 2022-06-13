@@ -1,8 +1,11 @@
 package com.gobbledn.postservice;
 
 import java.util.List;
+import java.util.Optional;
 
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,7 +18,7 @@ public class PostService {
         return repository.findAll();
     }
 
-    public Post getPostById(Integer id) {
+    public Post getPostById(String id) {
         return repository.findById(id).orElse(null);
     }
 
@@ -23,7 +26,7 @@ public class PostService {
         return repository.save(post);
     }
 
-    public void deletePostById(Integer id) {
+    public void deletePostById(String id) {
         repository.deleteById(id);
     }
 

@@ -1,6 +1,7 @@
 package com.gobbledn.profileservice;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -21,9 +22,7 @@ public class ProfileServiceApplication {
 	ProfileService profileService;
 
 	@Bean
-	public Consumer<String> postCreated() {
-		return message -> profileService.increaseProfilePosts(message);
-	}
+	public Consumer<String> postCreated() { return message -> profileService.increaseProfilePosts(message); }
 
 	@Bean
 	public ModelMapper modelMapper() {

@@ -16,6 +16,9 @@ spring:
       enabled: true
   application:
     name: PROFILE-SERVICE
+  rabbitmq:
+    host: rabbitmq-0.rabbitmq.default.svc.cluster.local
+    port: 5672
   cloud:
     stream:
       bindings:

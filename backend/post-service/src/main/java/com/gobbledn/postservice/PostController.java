@@ -28,7 +28,7 @@ public class PostController {
     }
 
     @GetMapping("/{postId}")
-    public Post getPostById(@PathVariable Integer postId) {
+    public Post getPostById(@PathVariable String postId) {
         return service.getPostById(postId);
     }
 
@@ -39,7 +39,7 @@ public class PostController {
     }
 
     @DeleteMapping("/{postId}")
-    public void deletePostById(@PathVariable Integer postId) {
+    public void deletePostById(@PathVariable String postId) {
         service.deletePostById(postId);
     }
 }
