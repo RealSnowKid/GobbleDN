@@ -12,7 +12,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 public class Post {
     @Id
-    private String Id;
+    private String id;
     private Integer userId;
     private String content;
     private Integer likes;

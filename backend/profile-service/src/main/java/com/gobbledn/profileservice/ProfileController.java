@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 @RestController
 @RequestMapping("/profiles")
@@ -45,10 +46,23 @@ public class ProfileController {
             newProfile.setFollowers_id(followers);
             newProfile.setFollower_count(followers.size());
             service.saveProfile(newProfile);
-            return new ResponseEntity<>("Successfully followed user with ID " + newProfile.getId(), HttpStatus.OK);
+            Optional<Profile> followerData = service.getProfileById(json.get("followerId"));
+            String azureFunctionResponse = CallAzureFunction(profileData.get(), followerData.get());
+            return new ResponseEntity<>("Successfully followed user with ID " + newProfile.getId() + "\r\nAzure Function Response: " + azureFunctionResponse,
+                    HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+    }
+
+    private String CallAzureFunction(Profile user, Profile follower) {
+        String uri = "https://gobbledntestazurefunction.azurewebsites.net/api/FollowTrigger";
+        RestTemplate restTemplate = new RestTemplate();
+        String username = user.getUsername();
+        String followerUsername = follower.getUsername();
+        uri = uri + String.format("?username=%s&follower=%s", username, followerUsername);
+        String result = restTemplate.getForObject(uri, String.class);
+        return result;
     }
 
     private ProfileDTO convertToDTO(Profile profile) {
