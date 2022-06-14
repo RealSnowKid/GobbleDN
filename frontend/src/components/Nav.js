@@ -1,5 +1,6 @@
 import { Navbar, Dropdown, Avatar, Button } from 'flowbite-react'
 import { useAuth0 } from "@auth0/auth0-react";
+import { Link } from 'react-router-dom';
 
 const Nav = () => {
     const { loginWithRedirect, logout, user, isAuthenticated, isLoading } = useAuth0();
@@ -7,16 +8,18 @@ const Nav = () => {
         <Navbar
             fluid={true}
         >
-            <Navbar.Brand href="/">
-                <img
-                    src="logo192.png"
-                    className="mr-3 h-6 sm:h-9"
-                    alt="GobbleDN Logo"
-                />
-                <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
-                    GobbleDN
-                </span>
-            </Navbar.Brand>
+            <Link to="/">
+                <Navbar.Brand>
+                    <img
+                        src="logo192.png"
+                        className="mr-3 h-6 sm:h-9"
+                        alt="GobbleDN Logo"
+                    />
+                    <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
+                        GobbleDN
+                    </span>
+                </Navbar.Brand>
+            </Link>
             <div className="flex md:order-2">
                 {isAuthenticated ?
                     <Dropdown
@@ -63,18 +66,26 @@ const Nav = () => {
                 <Navbar.Toggle />
             </div>
             <Navbar.Collapse>
-                <Navbar.Link href="/">
-                    Home
-                </Navbar.Link>
-                <Navbar.Link href="/explore">
-                    Explore
-                </Navbar.Link>
-                <Navbar.Link href="/notifications">
-                    Notifications
-                </Navbar.Link>
-                <Navbar.Link href="/messages">
-                    Messages
-                </Navbar.Link>
+                <Link to="/">
+                    <Navbar.Link>
+                        Home
+                    </Navbar.Link>
+                </Link>
+                <Link to="/explore">
+                    <Navbar.Link>
+                        Explore
+                    </Navbar.Link>
+                </Link>
+                <Link to="/notifications">
+                    <Navbar.Link>
+                        Notifications
+                    </Navbar.Link>
+                </Link>
+                <Link to="/messages">
+                    <Navbar.Link>
+                        Messages
+                    </Navbar.Link>
+                </Link>
             </Navbar.Collapse>
         </Navbar>
     )
